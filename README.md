@@ -6,7 +6,7 @@ Script and data material to :
 
 The script and figures can be found [online](https://github.com/rfrelat/SEM_MaizeBrandPrice/raw/main/SEM_MaizeBrandPrice.md), and the dataset for download [here](https://github.com/rfrelat/SEM_MaizeBrandPrice/raw/main/MaizeBrandPrice.csv).  
 
-[![DOI](https://zenodo.org/badge/320605700.svg)](https://zenodo.org/badge/latestdoi/320605700)
+[![DOI](https://zenodo.org/badge/592493435.svg)](https://zenodo.org/badge/latestdoi/592493435)
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
