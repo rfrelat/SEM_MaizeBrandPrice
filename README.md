@@ -1,4 +1,4 @@
-# Introduction to multivariate analysis for gender and agriculture
+# Structural Equation Modeling to test the relation between brand loyalty and price-quality perceptions
 
 Script and data material to :  
 

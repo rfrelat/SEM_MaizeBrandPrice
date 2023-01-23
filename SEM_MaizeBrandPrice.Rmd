@@ -4,7 +4,7 @@ author: "Ciro Domínguez Méndez and Romain Frelat"
 date: 'Last update: 23rd January 2023'
 output:
   html_document: 
-      keep_md: yes
+    keep_md: yes
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
