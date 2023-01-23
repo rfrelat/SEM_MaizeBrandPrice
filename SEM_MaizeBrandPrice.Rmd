@@ -1,0 +1,107 @@
+---
+title: "Brand loyalty and price-quality perceptions of hybrid maize seed in La Frailesca Chiapas, Mexico"
+author: "Ciro Domínguez Méndez and Romain Frelat"
+date: 'Last update: 23rd January 2023'
+output:
+  html_document: 
+      keep_md: yes
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This is the accompanying script and data for the article **Brand loyalty and price-quality perceptions of hybrid maize seed in La Frailesca Chiapas, Mexico** by Ciro Domínguez Méndez, Jason Donovan, Romain Frelat, and C.S. Srinivasan currently in review. 
+See the *Materials and Methods* section of the article for more details about the data and the method.
+
+# 1. Preliminaries
+
+
+### Load the packages
+The analysis require the packages `lavaan` (v ≥ 0.6), `psych` (v ≥ 2.2.9), and `semPlot` (v ≥ 1.1.6).
+
+```{r, message=FALSE}
+library(lavaan)
+library(psych)
+library(semPlot)
+```
+
+If you get an error message, check that the R packages `lavaan`, `psych` and `semPlot` are installed correctly. If not, use the command: `install.packages(c("lavaan", "psych", "semPlot"))`.
+
+### Load the dataset
+
+The dataset containing the 12 variables for the 393 farmers is stored in the csv file `MaizeBrandPrice.csv`, and available for download [here](https://github.com/rfrelat/SEM_MaizeBrandPrice/raw/main/MaizeBrandPrice.csv)
+
+The variables have been scaled so that all the values are within the same range, between -3 and 3. The questions (Q51 to Q58) followed a *7-point Likert scale*, including:  
+
+- “Agree very much”: 3 
+- “Agree”: 2
+- “Kind of agree”: 1 
+- “Do not agree or disagree”: 0 
+- “Kind of disagree”: -1 
+- “Disagree”: -2
+- “Disagree very much”: -3
+
+```{r loading}
+tab <- read.csv("MaizeBrandPrice.csv")
+dim(tab)
+names(tab)
+```
+
+
+
+# 2. Confirmatory Factor Analysis
+
+
+```{r CFA}
+CFA.model <- 'quality  =~ Q51 + Q52
+              value =~ Q53 + Q54
+              willbuy =~ Q55 + Q56
+              sacrifice =~ Q57 + Q58
+              loyalty  =~ commitment + preference'
+
+fitCFA <- cfa(CFA.model, data=tab, estimator="WLSMV")
+summary(fitCFA, fit.measures=TRUE, standardized=TRUE)
+```
+
+```{r plotCFA}
+semPaths(fitCFA, nCharNodes = 0, what='std', 
+         style = "lisrel", rotation = 4)
+```
+
+```{r tableCFA}
+standardizedSolution(fitCFA)[1:10,]
+```
+
+
+# 3 Structural Equation Modelling
+
+
+```{r SEM}
+model <- '  
+  # measurement model
+    quality  =~ Q51 + Q52
+    sacrifice =~ Q57 + Q58
+    value =~ Q53 + Q54
+    willbuy   =~ Q55 + Q56
+    loyalty  =~ commitment + preference
+  # regressions
+    quality ~ refprice
+    sacrifice ~ sellprice
+    value ~ sacrifice + quality + loyalty
+    willbuy ~ value
+'
+
+fitSEM <- sem(model, data=tab, estimator="WLSMV")
+summary(fitSEM, fit.measures=TRUE, standardized=TRUE)
+```
+
+```{r plotSEM}
+semPaths(fitSEM, nCharNodes = 0, what='std', 
+         style = "lisrel", rotation = 4)
+```
+
+```{r fitSEM}
+fitmeasures(fitSEM, c("chisq.scaled", "df", "rmsea", "srmr", "gfi", "agfi", "cfi", "tli"))
+```
+
+
