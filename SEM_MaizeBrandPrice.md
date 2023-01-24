@@ -1,14 +1,14 @@
 ---
 title: "Brand loyalty and price-quality perceptions of hybrid maize seed in La Frailesca Chiapas, Mexico"
-author: "Ciro Domínguez Méndez and Romain Frelat"
-date: 'Last update: 23rd January 2023'
+author: "Ciro Domínguez and Romain Frelat"
+date: 'Last update: 24th January 2023'
 output:
   html_document: 
     keep_md: yes
 ---
 
 
-This is the accompanying script and data for the article **Brand loyalty and price-quality perceptions of hybrid maize seed in La Frailesca Chiapas, Mexico** by Ciro Domínguez Méndez, Jason Donovan, Romain Frelat, and C.S. Srinivasan currently in review. 
+This is the accompanying script and data for the article **Brand loyalty and price-quality perceptions of hybrid maize seed in La Frailesca Chiapas, Mexico** by Ciro Domínguez, Jason Donovan, Romain Frelat, and C.S. Srinivasan currently in review. 
 See the *Materials and Methods* section of the article for more details about the data and the method.
 
 # 1. Preliminaries
@@ -365,14 +365,14 @@ semPaths(fitSEM, nCharNodes = 0, what='std',
 
 
 ```r
-fitmeasures(fitSEM, c("chisq.scaled", "df", "rmsea", "srmr", "gfi", "agfi", "cfi", "tli"))
+fitmeasures(fitSEM, c("chisq.scaled", "df", "rmsea", "srmr", "gfi", "agfi", "cfi"))
 ```
 
 ```
 ## chisq.scaled           df        rmsea         srmr          gfi         agfi 
 ##       77.773       49.000        0.023        0.048        0.991        0.985 
-##          cfi          tli 
-##        0.989        0.986
+##          cfi 
+##        0.989
 ```
 
 
